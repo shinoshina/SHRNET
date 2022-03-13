@@ -2,7 +2,6 @@
 #define _SHRNET_SOCKET
 
 #include <sys/socket.h>
-#include <iostream> // FOR CONST_CAST
 #include "Address.h"
 
 class Socket
@@ -16,7 +15,7 @@ public:
 
     void bindAddress(Address& addr);
 
-    int accept(Address * addr);
+    int acceptConn(Address * addr);
 
     int listen();
 

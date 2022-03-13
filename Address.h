@@ -18,7 +18,7 @@ public:
 
     Address(std::string ip, uint16_t port);
 
-    const struct sockaddr* sockAddr()
+    struct sockaddr* sockAddr()
     {
         return (struct sockaddr*)(&address);
     }
