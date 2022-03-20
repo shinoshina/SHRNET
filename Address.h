@@ -12,16 +12,18 @@ class Address
 {
 
 public:
-    explicit Address(sockaddr_in &addr);
-
     explicit Address(uint16_t port);
 
     Address(std::string ip, uint16_t port);
 
-    struct sockaddr* sockAddr()
+    Address() = default;
+
+    struct sockaddr_in* sockAddr()
     {
-        return (struct sockaddr*)(&address);
+        return &address;
     }
+
+    void setSockaddr(const struct sockaddr_in& addr);
 
     
 private:

@@ -15,7 +15,7 @@ public:
 
     void bindAddress(Address& addr);
 
-    int acceptConn(Address * addr);
+    int acceptConn(Address & addr);
 
     int listen();
 
