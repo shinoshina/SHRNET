@@ -3,8 +3,13 @@
 
 
 #include<functional>
+#include<sys/epoll.h>
 
-typedef std::function<void()> EventCallback;
+using  EventCallback = std::function<void()>;
+
+const int readEvent = EPOLLIN;
+const int writeEvent = EPOLLOUT;
+const int ergentRead = EPOLLPRI;
 
 
 class Channel
@@ -15,7 +20,14 @@ public:
     void handleEvent();
 
     void setCloseCallback(EventCallback cb);
-    void setMessageCallback(EventCallback cb);
+    void setReadCallback(EventCallback cb);
+    void setWriteCallback(EventCallback cb);
+
+    void update();
+
+    void setEvent(int event);
+
+    int getFd();
 
 
 
@@ -24,8 +36,11 @@ public:
 private:
     int socketfd;
 
+    int currentEvent;
+
     EventCallback closeCallback;
-    EventCallback messageCallback;
+    EventCallback readCallback;
+    EventCallback writeCallback;
 };
 
 #endif /* _SHRNET_CHANNEL */ 
