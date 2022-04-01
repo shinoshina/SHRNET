@@ -1,19 +1,22 @@
 #include "Channel.h"
+#include <iostream>
+void Channel::setCloseCallback(EventCallback cb) { closeCallback = cb; }
 
-void Channel::setCloseCallback(EventCallback cb) { closeCallback = std::move(cb); }
+void Channel::setReadCallback(EventCallback cb) { readCallback = cb; }
 
-void Channel::setReadCallback(EventCallback cb) { readCallback = std::move(cb); }
-
-void Channel::setWriteCallback(EventCallback cb) { writeCallback = std::move(cb); }
+void Channel::setWriteCallback(EventCallback cb) { writeCallback = cb; }
 
 void Channel::handleEvent()
 {
+
+    std::cout << "readEvent" << readEvent << std::endl;
+
     if (currentEvent & (readEvent | ergentRead))
     {
         if (readCallback)
             readCallback();
     }
-    if (currentEvent & writeEvent)
+    else if (currentEvent & writeEvent)
     {
         if (writeCallback)
             writeCallback();
@@ -25,7 +28,7 @@ void Channel::setEvent(int event)
     currentEvent = event;
 }
 
-int Channel::getFd()
+int Channel::getFd() const
 {
     return socketfd;
 }

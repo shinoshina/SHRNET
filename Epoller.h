@@ -36,9 +36,16 @@ public:
     }
 
     void fillChannels(ChannelList* channels,int eventNums);
-    void updateMonitorChannel(Channel channel);
+    void updateMonitorChannel(Channel *channel);
 
     void epoll(ChannelList* channels);
+
+    void debug()
+    {
+        channelList[0].handleEvent();
+    }
+
+    Channel* find(int fd);
 
 
 private:

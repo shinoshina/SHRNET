@@ -3,13 +3,17 @@
 
 using namespace std;
 
+
+void TEST()
+{
+    cout<<"nimasile"<<endl;
+}
 int main()
 {
     Channel channel(10);
+    EventCallback cb = TEST;
 
-    channel.setCloseCallback([](){
-        cout<<"success"<<endl;
-    });
+    channel.setCloseCallback(cb);
     
     channel.handleEvent();
 

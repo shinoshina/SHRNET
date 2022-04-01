@@ -5,7 +5,7 @@
 #include<functional>
 #include<sys/epoll.h>
 
-using  EventCallback = std::function<void()>;
+typedef std::function<void()> EventCallback;
 
 const int readEvent = EPOLLIN;
 const int writeEvent = EPOLLOUT;
@@ -27,7 +27,7 @@ public:
 
     void setEvent(int event);
 
-    int getFd();
+    int getFd() const;
 
 
 
@@ -35,6 +35,7 @@ public:
 
 private:
     int socketfd;
+
 
     int currentEvent;
 
