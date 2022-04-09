@@ -38,4 +38,5 @@ int Socket::acceptConn(Address &addr)
 int Socket::listen()
 {
     int ret = ::listen(this->fd(), SOMAXCONN);
+    std::cout<<"listening"<<std::endl;
 }

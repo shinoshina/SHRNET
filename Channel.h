@@ -30,9 +30,6 @@ public:
     int getFd() const;
 
 
-
-
-
 private:
     int socketfd;
 
