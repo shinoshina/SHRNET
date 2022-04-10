@@ -15,16 +15,18 @@ void Epoller::fillChannels(ChannelList *channels, int eventNums)
 
 void Epoller::updateMonitorChannel(Channel *channel)
 {
+     std::cout << "k" << std::endl;
     struct epoll_event ev;
     ev.events = (readEvent | ergentRead);
     ev.data.fd = channel->getFd();
-
+ std::cout << channel->getFd() << std::endl;
     epoll_ctl(epollfd, EPOLL_CTL_ADD, channel->getFd(), &ev);
 
     channelList.push_back(*channel);
+    std::cout << channel->getFd() << std::endl;
 }
 
-void Epoller::epoll(ChannelList *channels)
+int Epoller::epoll(ChannelList *channels)
 {
 
     int eventNums = ::epoll_wait(epollfd, &(*eventList.begin()), eventList.size(), 10000);
@@ -37,6 +39,8 @@ void Epoller::epoll(ChannelList *channels)
         std::cout << "fill success"
                   << "   channel size:" << (*channels).size() << std::endl;
     }
+
+    return eventNums;
 }
 
 Channel* Epoller::find(int fd)

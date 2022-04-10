@@ -3,6 +3,7 @@
 
 #include "Channel.h"
 #include <vector>
+#include <iostream>
 
 /*** epoll_event***/
 // struct epoll_event
@@ -33,12 +34,14 @@ public:
         // epoll_create() is ignored since linux2.6.8
         //EPOLL_CLOEXEC means close-on-exec
         epollfd = epoll_create1(EPOLL_CLOEXEC);
+
+        std::cout<<"epoller construct"<<std::endl;
     }
 
     void fillChannels(ChannelList* channels,int eventNums);
     void updateMonitorChannel(Channel *channel);
 
-    void epoll(ChannelList* channels);
+    int epoll(ChannelList* channels);
 
     void debug()
     {

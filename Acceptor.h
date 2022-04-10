@@ -4,6 +4,7 @@
 #include "Channel.h"
 #include "Socket.h"
 #include "Address.h"
+#include "Eventloop.h"
 
 
 
@@ -12,7 +13,7 @@ class Acceptor
 {
 public:
 
-  Acceptor(Address& bindAddr);   
+  Acceptor(Address& bindAddr,Eventloop* loop);   
 
   void setConnentionCallback(EventCallback cb);
 
@@ -30,6 +31,7 @@ public:
 private:
 Socket acceptSocket;
 Channel acceptorChannel;
+Eventloop* mainLoop;
 
 
 };
